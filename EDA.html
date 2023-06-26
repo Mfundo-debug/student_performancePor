@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Student Performance based in Portugal</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="EDA_files/libs/clipboard/clipboard.min.js"></script>
+<script src="EDA_files/libs/quarto-html/quarto.js"></script>
+<script src="EDA_files/libs/quarto-html/popper.min.js"></script>
+<script src="EDA_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="EDA_files/libs/quarto-html/anchor.min.js"></script>
+<link href="EDA_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="EDA_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="EDA_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="EDA_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="EDA_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Student Performance based in Portugal</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="information-about-the-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="information-about-the-dataset">Information about the dataset</h4>
+<ul>
+<li>thw dataset is about the performance of students in two subjects: Math and Portuguese</li>
+<li>the dataset attributes include student grades, demographic, social and school related features</li>
+<li>the target attribute is G3, the final grade of the student</li>
+</ul>
+</section>
+<section id="additional-information" class="level4">
+<h4 class="anchored" data-anchor-id="additional-information">Additional information</h4>
+<p>1 school - student’s school (binary: ‘GP’ - Gabriel Pereira or ‘MS’ - Mousinho da Silveira)</p>
+<p>2 sex - student’s sex (binary: ‘F’ - female or ‘M’ - male)</p>
+<p>3 age - student’s age (numeric: from 15 to 22)</p>
+<p>4 address - student’s home address type (binary: ‘U’ - urban or ‘R’ - rural)</p>
+<p>5 famsize - family size (binary: ‘LE3’ - less or equal to 3 or ‘GT3’ - greater than 3)</p>
+<p>6 Pstatus - parent’s cohabitation status (binary: ‘T’ - living together or ‘A’ - apart)</p>
+<p>7 Medu - mother’s education (numeric: 0 - none, 1 - primary education (4th grade), 2 â€“ 5th to 9th grade, 3 â€“ secondary education or 4 â€“ higher education)</p>
+<p>8 Fedu - father’s education (numeric: 0 - none, 1 - primary education (4th grade), 2 â€“ 5th to 9th grade, 3 â€“ secondary education or 4 â€“ higher education)</p>
+<p>9 Mjob - mother’s job (nominal: ‘teacher’, ‘health’ care related, civil ‘services’ (e.g.&nbsp;administrative or police), ‘at_home’ or ‘other’)</p>
+<p>10 Fjob - father’s job (nominal: ‘teacher’, ‘health’ care related, civil ‘services’ (e.g.&nbsp;administrative or police), ‘at_home’ or ‘other’)</p>
+<p>11 reason - reason to choose this school (nominal: close to ‘home’, school ‘reputation’, ‘course’ preference or ‘other’)</p>
+<p>12 guardian - student’s guardian (nominal: ‘mother’, ‘father’ or ‘other’)</p>
+<p>13 traveltime - home to school travel time (numeric: 1 - &lt;15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - &gt;1 hour)</p>
+<p>14 studytime - weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours)</p>
+<p>15 failures - number of past class failures (numeric: n if 1&lt;=n&lt;3, else 4)</p>
+<p>16 schoolsup - extra educational support (binary: yes or no)</p>
+<p>17 famsup - family educational support (binary: yes or no)</p>
+<p>18 paid - extra paid classes within the course subject (Math or Portuguese) (binary: yes or no)</p>
+<p>19 activities - extra-curricular activities (binary: yes or no)</p>
+<p>20 nursery - attended nursery school (binary: yes or no)</p>
+<p>21 higher - wants to take higher education (binary: yes or no)</p>
+<p>22 internet - Internet access at home (binary: yes or no)</p>
+<p>23 romantic - with a romantic relationship (binary: yes or no)</p>
+<p>24 famrel - quality of family relationships (numeric: from 1 - very bad to 5 - excellent)</p>
+<p>25 freetime - free time after school (numeric: from 1 - very low to 5 - very high)</p>
+<p>26 goout - going out with friends (numeric: from 1 - very low to 5 - very high)</p>
+<p>27 Dalc - workday alcohol consumption (numeric: from 1 - very low to 5 - very high)</p>
+<p>28 Walc - weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)</p>
+<p>29 health - current health status (numeric: from 1 - very bad to 5 - very good)</p>
+<p>30 absences - number of school absences (numeric: from 0 to 93)</p>
+</section>
+<section id="these-grades-are-related-with-the-course-subject-math-or-portuguese" class="level1">
+<h1>these grades are related with the course subject, Math or Portuguese:</h1>
+<p>31 G1 - first period grade (numeric: from 0 to 20) 31 G2 - second period grade (numeric: from 0 to 20) 32 G3 - final grade (numeric: from 0 to 20, output target)</p>
+<section id="source" class="level4">
+<h4 class="anchored" data-anchor-id="source">Source</h4>
+<p>https://archive.ics.uci.edu/ml/datasets/Student+Performance</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#import necessary libs</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the datasets</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>math_data <span class="op">=</span> pd.read_csv(<span class="st">'student-mat.csv'</span>, sep<span class="op">=</span><span class="st">';'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>por_data <span class="op">=</span> pd.read_csv(<span class="st">'student-por.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Columns in math_data"</span>, math_data.columns)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Columns in por_data"</span>, por_data.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Columns in math_data Index(['school', 'sex', 'age', 'address', 'famsize', 'Pstatus', 'Medu', 'Fedu',
+       'Mjob', 'Fjob', 'reason', 'guardian', 'traveltime', 'studytime',
+       'failures', 'schoolsup', 'famsup', 'paid', 'activities', 'nursery',
+       'higher', 'internet', 'romantic', 'famrel', 'freetime', 'goout', 'Dalc',
+       'Walc', 'health', 'absences', 'G1', 'G2', 'G3'],
+      dtype='object')
+Columns in por_data Index(['school', 'sex', 'age', 'address', 'famsize', 'Pstatus', 'Medu', 'Fedu',
+       'Mjob', 'Fjob', 'reason', 'guardian', 'traveltime', 'studytime',
+       'failures', 'schoolsup', 'famsup', 'paid', 'activities', 'nursery',
+       'higher', 'internet', 'romantic', 'famrel', 'freetime', 'goout', 'Dalc',
+       'Walc', 'health', 'absences', 'G1', 'G2', 'G3'],
+      dtype='object')</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>por_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">school</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">address</th>
+<th data-quarto-table-cell-role="th">famsize</th>
+<th data-quarto-table-cell-role="th">Pstatus</th>
+<th data-quarto-table-cell-role="th">Medu</th>
+<th data-quarto-table-cell-role="th">Fedu</th>
+<th data-quarto-table-cell-role="th">Mjob</th>
+<th data-quarto-table-cell-role="th">Fjob</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">famrel</th>
+<th data-quarto-table-cell-role="th">freetime</th>
+<th data-quarto-table-cell-role="th">goout</th>
+<th data-quarto-table-cell-role="th">Dalc</th>
+<th data-quarto-table-cell-role="th">Walc</th>
+<th data-quarto-table-cell-role="th">health</th>
+<th data-quarto-table-cell-role="th">absences</th>
+<th data-quarto-table-cell-role="th">G1</th>
+<th data-quarto-table-cell-role="th">G2</th>
+<th data-quarto-table-cell-role="th">G3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>GP</td>
+<td>F</td>
+<td>18</td>
+<td>U</td>
+<td>GT3</td>
+<td>A</td>
+<td>4</td>
+<td>4</td>
+<td>at_home</td>
+<td>teacher</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GP</td>
+<td>F</td>
+<td>17</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>1</td>
+<td>1</td>
+<td>at_home</td>
+<td>other</td>
+<td>...</td>
+<td>5</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>2</td>
+<td>9</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>GP</td>
+<td>F</td>
+<td>15</td>
+<td>U</td>
+<td>LE3</td>
+<td>T</td>
+<td>1</td>
+<td>1</td>
+<td>at_home</td>
+<td>other</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>6</td>
+<td>12</td>
+<td>13</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GP</td>
+<td>F</td>
+<td>15</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>4</td>
+<td>2</td>
+<td>health</td>
+<td>services</td>
+<td>...</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>5</td>
+<td>0</td>
+<td>14</td>
+<td>14</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>GP</td>
+<td>F</td>
+<td>16</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>3</td>
+<td>3</td>
+<td>other</td>
+<td>other</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>11</td>
+<td>13</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 33 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>math_data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">school</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">address</th>
+<th data-quarto-table-cell-role="th">famsize</th>
+<th data-quarto-table-cell-role="th">Pstatus</th>
+<th data-quarto-table-cell-role="th">Medu</th>
+<th data-quarto-table-cell-role="th">Fedu</th>
+<th data-quarto-table-cell-role="th">Mjob</th>
+<th data-quarto-table-cell-role="th">Fjob</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">famrel</th>
+<th data-quarto-table-cell-role="th">freetime</th>
+<th data-quarto-table-cell-role="th">goout</th>
+<th data-quarto-table-cell-role="th">Dalc</th>
+<th data-quarto-table-cell-role="th">Walc</th>
+<th data-quarto-table-cell-role="th">health</th>
+<th data-quarto-table-cell-role="th">absences</th>
+<th data-quarto-table-cell-role="th">G1</th>
+<th data-quarto-table-cell-role="th">G2</th>
+<th data-quarto-table-cell-role="th">G3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>GP</td>
+<td>F</td>
+<td>18</td>
+<td>U</td>
+<td>GT3</td>
+<td>A</td>
+<td>4</td>
+<td>4</td>
+<td>at_home</td>
+<td>teacher</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>6</td>
+<td>5</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GP</td>
+<td>F</td>
+<td>17</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>1</td>
+<td>1</td>
+<td>at_home</td>
+<td>other</td>
+<td>...</td>
+<td>5</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>GP</td>
+<td>F</td>
+<td>15</td>
+<td>U</td>
+<td>LE3</td>
+<td>T</td>
+<td>1</td>
+<td>1</td>
+<td>at_home</td>
+<td>other</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>10</td>
+<td>7</td>
+<td>8</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GP</td>
+<td>F</td>
+<td>15</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>4</td>
+<td>2</td>
+<td>health</td>
+<td>services</td>
+<td>...</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>5</td>
+<td>2</td>
+<td>15</td>
+<td>14</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>GP</td>
+<td>F</td>
+<td>16</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>3</td>
+<td>3</td>
+<td>other</td>
+<td>other</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>4</td>
+<td>6</td>
+<td>10</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 33 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#specify the common columns to merge on</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>merge_cols <span class="op">=</span> [<span class="st">'school'</span>,<span class="st">'sex'</span>,<span class="st">'age'</span>,<span class="st">'address'</span>,<span class="st">'famsize'</span>,<span class="st">'Pstatus'</span>,<span class="st">'Medu'</span>,<span class="st">'Fedu'</span>,<span class="st">'Mjob'</span>,<span class="st">'Fjob'</span>,<span class="st">'reason'</span>,<span class="st">'nursery'</span>,<span class="st">'internet'</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#merge the datasets</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.merge(math_data, por_data, on<span class="op">=</span>merge_cols)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shape of the data:"</span>, data.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape of the data: (382, 53)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">school</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">address</th>
+<th data-quarto-table-cell-role="th">famsize</th>
+<th data-quarto-table-cell-role="th">Pstatus</th>
+<th data-quarto-table-cell-role="th">Medu</th>
+<th data-quarto-table-cell-role="th">Fedu</th>
+<th data-quarto-table-cell-role="th">Mjob</th>
+<th data-quarto-table-cell-role="th">Fjob</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">famrel_y</th>
+<th data-quarto-table-cell-role="th">freetime_y</th>
+<th data-quarto-table-cell-role="th">goout_y</th>
+<th data-quarto-table-cell-role="th">Dalc_y</th>
+<th data-quarto-table-cell-role="th">Walc_y</th>
+<th data-quarto-table-cell-role="th">health_y</th>
+<th data-quarto-table-cell-role="th">absences_y</th>
+<th data-quarto-table-cell-role="th">G1_y</th>
+<th data-quarto-table-cell-role="th">G2_y</th>
+<th data-quarto-table-cell-role="th">G3_y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>GP</td>
+<td>F</td>
+<td>18</td>
+<td>U</td>
+<td>GT3</td>
+<td>A</td>
+<td>4</td>
+<td>4</td>
+<td>at_home</td>
+<td>teacher</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>GP</td>
+<td>F</td>
+<td>17</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>1</td>
+<td>1</td>
+<td>at_home</td>
+<td>other</td>
+<td>...</td>
+<td>5</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>2</td>
+<td>9</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>GP</td>
+<td>F</td>
+<td>15</td>
+<td>U</td>
+<td>LE3</td>
+<td>T</td>
+<td>1</td>
+<td>1</td>
+<td>at_home</td>
+<td>other</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>6</td>
+<td>12</td>
+<td>13</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>GP</td>
+<td>F</td>
+<td>15</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>4</td>
+<td>2</td>
+<td>health</td>
+<td>services</td>
+<td>...</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>5</td>
+<td>0</td>
+<td>14</td>
+<td>14</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>GP</td>
+<td>F</td>
+<td>16</td>
+<td>U</td>
+<td>GT3</td>
+<td>T</td>
+<td>3</td>
+<td>3</td>
+<td>other</td>
+<td>other</td>
+<td>...</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>0</td>
+<td>11</td>
+<td>13</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 53 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>Index(['school', 'sex', 'age', 'address', 'famsize', 'Pstatus', 'Medu', 'Fedu',
+       'Mjob', 'Fjob', 'reason', 'guardian_x', 'traveltime_x', 'studytime_x',
+       'failures_x', 'schoolsup_x', 'famsup_x', 'paid_x', 'activities_x',
+       'nursery', 'higher_x', 'internet', 'romantic_x', 'famrel_x',
+       'freetime_x', 'goout_x', 'Dalc_x', 'Walc_x', 'health_x', 'absences_x',
+       'G1_x', 'G2_x', 'G3_x', 'guardian_y', 'traveltime_y', 'studytime_y',
+       'failures_y', 'schoolsup_y', 'famsup_y', 'paid_y', 'activities_y',
+       'higher_y', 'romantic_y', 'famrel_y', 'freetime_y', 'goout_y', 'Dalc_y',
+       'Walc_y', 'health_y', 'absences_y', 'G1_y', 'G2_y', 'G3_y'],
+      dtype='object')</code></pre>
+</div>
+</div>
+</section>
+<section id="data-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-preprocessing">Data Preprocessing</h3>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check for missing values</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>data.isnull().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>school          0
+sex             0
+age             0
+address         0
+famsize         0
+Pstatus         0
+Medu            0
+Fedu            0
+Mjob            0
+Fjob            0
+reason          0
+guardian_x      0
+traveltime_x    0
+studytime_x     0
+failures_x      0
+schoolsup_x     0
+famsup_x        0
+paid_x          0
+activities_x    0
+nursery         0
+higher_x        0
+internet        0
+romantic_x      0
+famrel_x        0
+freetime_x      0
+goout_x         0
+Dalc_x          0
+Walc_x          0
+health_x        0
+absences_x      0
+G1_x            0
+G2_x            0
+G3_x            0
+guardian_y      0
+traveltime_y    0
+studytime_y     0
+failures_y      0
+schoolsup_y     0
+famsup_y        0
+paid_y          0
+activities_y    0
+higher_y        0
+romantic_y      0
+famrel_y        0
+freetime_y      0
+goout_y         0
+Dalc_y          0
+Walc_y          0
+health_y        0
+absences_y      0
+G1_y            0
+G2_y            0
+G3_y            0
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check for duplicate rows</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data.duplicated().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>0</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check for the datatypes</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>data.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>school          object
+sex             object
+age              int64
+address         object
+famsize         object
+Pstatus         object
+Medu             int64
+Fedu             int64
+Mjob            object
+Fjob            object
+reason          object
+guardian_x      object
+traveltime_x     int64
+studytime_x      int64
+failures_x       int64
+schoolsup_x     object
+famsup_x        object
+paid_x          object
+activities_x    object
+nursery         object
+higher_x        object
+internet        object
+romantic_x      object
+famrel_x         int64
+freetime_x       int64
+goout_x          int64
+Dalc_x           int64
+Walc_x           int64
+health_x         int64
+absences_x       int64
+G1_x             int64
+G2_x             int64
+G3_x             int64
+guardian_y      object
+traveltime_y     int64
+studytime_y      int64
+failures_y       int64
+schoolsup_y     object
+famsup_y        object
+paid_y          object
+activities_y    object
+higher_y        object
+romantic_y      object
+famrel_y         int64
+freetime_y       int64
+goout_y          int64
+Dalc_y           int64
+Walc_y           int64
+health_y         int64
+absences_y       int64
+G1_y             int64
+G2_y             int64
+G3_y             int64
+dtype: object</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check for the unique values in each column</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> data.columns:</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(col, data[col].unique())</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>school ['GP' 'MS']
+sex ['F' 'M']
+age [18 17 15 16 19 22 20]
+address ['U' 'R']
+famsize ['GT3' 'LE3']
+Pstatus ['A' 'T']
+Medu [4 1 3 2 0]
+Fedu [4 1 2 3 0]
+Mjob ['at_home' 'health' 'other' 'services' 'teacher']
+Fjob ['teacher' 'other' 'services' 'health' 'at_home']
+reason ['course' 'other' 'home' 'reputation']
+guardian_x ['mother' 'father' 'other']
+traveltime_x [2 1 3 4]
+studytime_x [2 3 1 4]
+failures_x [0 3 2 1]
+schoolsup_x ['yes' 'no']
+famsup_x ['no' 'yes']
+paid_x ['no' 'yes']
+activities_x ['no' 'yes']
+nursery ['yes' 'no']
+higher_x ['yes' 'no']
+internet ['no' 'yes']
+romantic_x ['no' 'yes']
+famrel_x [4 5 3 1 2]
+freetime_x [3 2 4 1 5]
+goout_x [4 3 2 1 5]
+Dalc_x [1 2 5 3 4]
+Walc_x [1 3 2 4 5]
+health_x [3 5 1 2 4]
+absences_x [ 6  4 10  2  0 16 14  7  8 25 12 54 18 26 20 56 24 28  5 13 15 22  3 21
+  1 75 30 19  9 11 23 17]
+G1_x [ 5  7 15  6 12 16 14 10 13  8 11  9 17 19 18  4  3]
+G2_x [ 6  5  8 14 10 15 12 18 16 13  9 11  7 19  0 17]
+G3_x [ 6 10 15 11 19  9 12 14 16  5  8 17 18 13 20  7  0  4]
+guardian_y ['mother' 'father' 'other']
+traveltime_y [2 1 3 4]
+studytime_y [2 3 1 4]
+failures_y [0 3 1 2]
+schoolsup_y ['yes' 'no']
+famsup_y ['no' 'yes']
+paid_y ['no' 'yes']
+activities_y ['no' 'yes']
+higher_y ['yes' 'no']
+romantic_y ['no' 'yes']
+famrel_y [4 5 3 1 2]
+freetime_y [3 2 4 1 5]
+goout_y [4 3 2 1 5]
+Dalc_y [1 2 5 3 4]
+Walc_y [1 3 2 4 5]
+health_y [3 5 1 2 4]
+absences_y [ 4  2  6  0 10  8 16 14  1 22 12 32 30 21 15  9  7 18  3]
+G1_y [ 0  9 12 14 11 13 10 15 17  8 16 18  7 19  5]
+G2_y [11 13 14 12 16 17  8 10 15  9  7 18 19  5]
+G3_y [11 12 14 13 17 15  7 10 16  9  6  8 18  0  1  5 19]</code></pre>
+</div>
+</div>
+</section>
+<section id="exploratory-data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h3>
+<ul>
+<li>The dataset has 33 attributes and 1044 instances</li>
+<li>The dataset has no missing values</li>
+<li>The dataset has 3 target attributes: G1, G2 and G3</li>
+<li>explore number of absence</li>
+<li>explore number of failures</li>
+<li>explore number of students who want to take higher education</li>
+<li>explore number of students who have internet access at home</li>
+<li>explore number of students who have romantic relationship</li>
+<li>explore number of students who have extra educational support</li>
+<li>explore number of students who have family educational support</li>
+<li>explore number of students who have extra paid classes within the course subject</li>
+<li>explore number of students who have extra-curricular activities</li>
+<li>explore number of students who attended nursery school</li>
+<li>explore number of students who have quality of family relationships</li>
+<li>explore number of students who have free time after school</li>
+<li>explore number of students who go out with friends</li>
+<li>explore number of students who have workday alcohol consumption</li>
+<li>explore number of students who have weekend alcohol consumption</li>
+<li>explore number of students who have current health status</li>
+<li>explore number of students who have school absences</li>
+<li>explore number of students who have first period grade</li>
+<li>explore number of students who have second period grade</li>
+<li>explore number of students who have final grade</li>
+<li>explore number of students who have first period grade, second period grade and final grade</li>
+</ul>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.boxplot(x<span class="op">=</span>data[<span class="st">'G3_x'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check for the outliers</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> data.columns:</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data[col].dtype <span class="op">!=</span> <span class="st">'object'</span>:</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        sns.boxplot(x<span class="op">=</span>data[col])</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-4.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-5.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-6.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-7.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-8.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-9.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-10.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-11.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-12.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-13.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-14.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-15.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-16.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-17.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-18.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-19.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-20.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-21.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-22.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-23.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-24.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-25.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-26.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-27.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-28.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-15-output-29.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># explore the categorical variables</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> data.columns:</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data[col].dtype <span class="op">==</span> <span class="st">'object'</span>:</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        sns.countplot(x<span class="op">=</span>data[col])</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-4.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-5.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-6.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-7.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-8.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-9.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-10.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-11.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-12.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-13.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-14.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-15.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-16.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-17.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-18.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-19.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-20.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-21.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-22.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-23.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="EDA_files/figure-html/cell-16-output-24.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># explore the categorical variables and return the count of each category only</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> data.columns:</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data[col].dtype <span class="op">==</span> <span class="st">'object'</span>:</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(data[col].value_counts())</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"====================================================="</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>school
+GP    342
+MS     40
+Name: count, dtype: int64
+=====================================================
+sex
+F    198
+M    184
+Name: count, dtype: int64
+=====================================================
+address
+U    301
+R     81
+Name: count, dtype: int64
+=====================================================
+famsize
+GT3    278
+LE3    104
+Name: count, dtype: int64
+=====================================================
+Pstatus
+T    344
+A     38
+Name: count, dtype: int64
+=====================================================
+Mjob
+other       138
+services     96
+teacher      62
+at_home      53
+health       33
+Name: count, dtype: int64
+=====================================================
+Fjob
+other       211
+services    107
+teacher      31
+health       17
+at_home      16
+Name: count, dtype: int64
+=====================================================
+reason
+course        140
+home          110
+reputation     98
+other          34
+Name: count, dtype: int64
+=====================================================
+guardian_x
+mother    275
+father     91
+other      16
+Name: count, dtype: int64
+=====================================================
+schoolsup_x
+no     331
+yes     51
+Name: count, dtype: int64
+=====================================================
+famsup_x
+yes    238
+no     144
+Name: count, dtype: int64
+=====================================================
+paid_x
+no     205
+yes    177
+Name: count, dtype: int64
+=====================================================
+activities_x
+yes    201
+no     181
+Name: count, dtype: int64
+=====================================================
+nursery
+yes    310
+no      72
+Name: count, dtype: int64
+=====================================================
+higher_x
+yes    364
+no      18
+Name: count, dtype: int64
+=====================================================
+internet
+yes    324
+no      58
+Name: count, dtype: int64
+=====================================================
+romantic_x
+no     261
+yes    121
+Name: count, dtype: int64
+=====================================================
+guardian_y
+mother    275
+father     91
+other      16
+Name: count, dtype: int64
+=====================================================
+schoolsup_y
+no     332
+yes     50
+Name: count, dtype: int64
+=====================================================
+famsup_y
+yes    239
+no     143
+Name: count, dtype: int64
+=====================================================
+paid_y
+no     356
+yes     26
+Name: count, dtype: int64
+=====================================================
+activities_y
+yes    200
+no     182
+Name: count, dtype: int64
+=====================================================
+higher_y
+yes    364
+no      18
+Name: count, dtype: int64
+=====================================================
+romantic_y
+no     259
+yes    123
+Name: count, dtype: int64
+=====================================================</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
