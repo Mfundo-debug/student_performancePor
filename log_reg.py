@@ -9,7 +9,7 @@ st.title('Student Performance Prediction')
 st.write('This app predicts the result of student performance based on the data of student.')
 st.write('Please input the data of student and click the button to predict the result of student performance.')
 #LOAD THE MODEL
-model = joblib.load('logistic_reg.pkl')
+model = joblib.load('logistic_reg.joblib')
 #CREATE THE USER INPUT FIELDS
 #st.sidebar.header('User Input Parameters')
 #add features for the model from student performance dataset
