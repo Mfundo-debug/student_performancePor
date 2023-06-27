@@ -206,6 +206,7 @@ else:
     health = 4
 #absences
 absences = absences
+#if using all scalars you must pass an index
 #Create a dictionary containing the features
 features = pd.DataFrame({
     'sex': sex, 'age': age, 'address': address, 'famsize': famsize, 'Pstatus': Pstatus, 'Medu': Medu, 'Fedu': Fedu,
