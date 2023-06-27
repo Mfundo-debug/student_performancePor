@@ -9,7 +9,7 @@ st.title('Student Performance Prediction')
 st.write('This app predicts the result of student performance based on the data of student.')
 st.write('Please input the data of student and click the button to predict the result of student performance.')
 #LOAD THE MODEL
-model = joblib.load('log_reg.pkl')
+model = joblib.load('logistic_reg.pkl')
 #CREATE THE USER INPUT FIELDS
 #st.sidebar.header('User Input Parameters')
 #add features for the model from student performance dataset
@@ -223,7 +223,7 @@ if output == 1:
     st.write('This student is likely to pass with probability of ', round(prediction[0][1]*100), '%')
 else:
     st.write('This student is likely to fail with probability of ', round(prediction[0][0]*100), '%')
-    
+
 
 
 
