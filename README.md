@@ -85,3 +85,4 @@ https://archive.ics.uci.edu/ml/datasets/Student+Performance
     - [x] logistic regression model
     - [x] random forest model
     - [x] decision tree model
+    - [x] KNN model
