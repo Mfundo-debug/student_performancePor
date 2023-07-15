@@ -24,7 +24,7 @@
 
 
 ## Data
-
+The data for this project focuses on student achievement in secondary education in two Portuguese schools. The dataset includes various attributes such as student grades, demographic information, social factors, and school-related features. The data for this project was downloaded from the UCI Machine Learning Repository. You can access the dataset at [this link](https://archive.ics.uci.edu/dataset/320/student+performance).
 
 ## Methods
 
