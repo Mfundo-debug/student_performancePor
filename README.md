@@ -19,8 +19,8 @@ The following table provides a description of the attributes present in both the
 
 | Attribute  | Attribute Description                                                                       | Attribute Type | Attribute Values                            |
 |------------|-------------------------------------------------------------------------------------------|----------------|---------------------------------------------|
-| school     | Student's school         | Binary         | 'GP', 'MS'                                  |
-| sex        | Student's sex                                       | Binary         | 'F', 'M'                                    |
+| school     | Student's school ( 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)        | Binary         | 'GP', 'MS'                                  |
+| sex        | Student's sex  ( 'F' - female or 'M' - male)                                     | Binary         | 'F', 'M'                                    |
 | age        | Student's age                                                 | Numeric        | 15 to 22                                    |
 | address    | Student's home address type                          | Binary         | 'U', 'R'                                    |
 | famsize    | Family size               | Binary         | 'LE3', 'GT3'                                |
