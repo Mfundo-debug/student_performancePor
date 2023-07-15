@@ -15,9 +15,7 @@
 ## Data
 The data for this project focuses on student achievement in secondary education in two Portuguese schools. The dataset includes various attributes such as student grades, demographic information, social factors, and school-related features. The data for this project was downloaded from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/320/student+performance).
 
-# Data Description
-
-The following table provides a description of the attributes present in both the "student-mat.csv" (Math course) and "student-por.csv" (Portuguese language course) datasets:
+The following table provides a description of the attributes present in both the `student-mat.csv(Math course)` and `student-por.csv (Portuguese language course)` datasets:
 
 | Attribute  | Attribute Description                                                                       | Attribute Type | Attribute Values                            |
 |------------|-------------------------------------------------------------------------------------------|----------------|---------------------------------------------|
