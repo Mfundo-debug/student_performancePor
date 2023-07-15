@@ -1,16 +1,18 @@
-# Student Performance in Portugal
+# Factors Affecting Student Grades Analysis and Prediction
 
 ## Overview
-The goal of this project is to conduct a comprehensive analysis to identify the factors that significantly impact student grades. By understanding the key drivers of academic performance, we aim to develop targeted interventions and support systems that can improve student outcomes and enhance their overall educational experience. The project will involve statistical modeling, correlation analysis, and feature importance determination to uncover the factors that have the most significant influence on student grades.
+This project aims to conduct a comprehensive analysis to identify the key factors that significantly impact student grades and develop a model to predict student performance. By utilizing statistical modeling techniques, correlation analysis, and feature importance determination, we seek to gain valuable insights that can enhance interventions and support systems, ultimately improving academic performance.
 
-## Project Description
+## Background
+Understanding the factors that influence student grades is essential for educational institutions and stakeholders to implement effective strategies that foster academic success. By analyzing a wide range of potential variables, we can uncover the most influential factors affecting student performance. Additionally, developing a predictive model can provide insights into future performance trends and enable targeted interventions.
 
-
-## Installation
-
-
-## Usage
-
+## Objectives 
+1. Identify the key factors that significantly impact student grades.
+2. Utilize statistical modeling techniques to analyze and understand the relationships between various variables and academic performance.
+3. Conduct correlation analysis to determine the strength and direction of associations between factors and student grades.
+4. Determine feature importance to prioritize the most influential variables.
+5. Develop a predictive model to forecast student grades based on the identified factors.
+6. Provide actionable insights that can inform the development of tailored interventions and support systems to improve academic performance.
 
 ## Data
 The data for this project focuses on student achievement in secondary education in two Portuguese schools. The dataset includes various attributes such as student grades, demographic information, social factors, and school-related features. The data for this project was downloaded from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/320/student+performance).
@@ -55,15 +57,4 @@ The following table provides a description of the attributes present in both the
 
 This table provides a summary of the attributes in the dataset, their descriptions, types, and possible values.
 
-
-## Methods
-
-
-## Results
-
-
-## Contributing
-
-
-## License
 
