@@ -17,7 +17,7 @@ The data for this project focuses on student achievement in secondary education 
 
 The following table provides a description of the attributes present in both the `student-mat.csv(Math course)` and `student-por.csv (Portuguese language course)` datasets:
 
-| Attribute | Attribute Description                                            | Attribute Type | Attribute Values                                                    |
+| Attribute |  Description                                            | Type |  Values                                                    |
 |-----------|-----------------------------------------------------------------|----------------|--------------------------------------------------------------------|
 | school    | Student's school                                                | Binary         | 'GP' - Gabriel Pereira<br/>'MS' - Mousinho da Silveira              |
 | sex       | Student's sex                                                   | Binary         | 'F' - female<br/>'M' - male                                        |
