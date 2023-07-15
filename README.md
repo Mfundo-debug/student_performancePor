@@ -19,11 +19,11 @@ The following table provides a description of the attributes present in both the
 
 | Attribute  | Attribute Description                                                                       | Attribute Type | Attribute Values                            |
 |------------|-------------------------------------------------------------------------------------------|----------------|---------------------------------------------|
-| school     | Student's school ('GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)         | Binary         | 'GP', 'MS'                                  |
-| sex        | Student's sex ('F' - female or 'M' - male)                                        | Binary         | 'F', 'M'                                    |
-| age        | Student's age (from 15 to 22)                                                    | Numeric        | 15 to 22                                    |
-| address    | Student's home address type ('U' - urban or 'R' - rural)                          | Binary         | 'U', 'R'                                    |
-| famsize    | Family size ('LE3' - less or equal to 3 or 'GT3' - greater than 3)                | Binary         | 'LE3', 'GT3'                                |
+| school     | Student's school `('GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)`         | Binary         | 'GP', 'MS'                                  |
+| sex        | Student's sex `('F' - female or 'M' - male)`                                        | Binary         | 'F', 'M'                                    |
+| age        | Student's age `(from 15 to 22)`                                                   | Numeric        | 15 to 22                                    |
+| address    | Student's home address type `('U' - urban or 'R' - rural)`                          | Binary         | 'U', 'R'                                    |
+| famsize    | Family size `('LE3' - less or equal to 3 or 'GT3' - greater than 3)`                | Binary         | 'LE3', 'GT3'                                |
 | Pstatus    | Parent's cohabitation status ('T' - living together or 'A' - apart)               | Binary         | 'T', 'A'                                    |
 | Medu       | Mother's education (0 - none, 1 - primary education (4th grade), 2 - 5th to 9th grade, 3 - secondary education or 4 - higher education) | Numeric | 0, 1, 2, 3, 4                               |
 | Fedu       | Father's education (0 - none, 1 - primary education (4th grade), 2 - 5th to 9th grade, 3 - secondary education or 4 - higher education) | Numeric | 0, 1, 2, 3, 4                               |
