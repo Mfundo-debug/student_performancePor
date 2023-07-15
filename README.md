@@ -1,7 +1,7 @@
 # Student Performance in Portugal
 
 ## Overview
-
+The goal of this project is to conduct a comprehensive analysis to identify the factors that significantly impact student grades. By understanding the key drivers of academic performance, we aim to develop targeted interventions and support systems that can improve student outcomes and enhance their overall educational experience. The project will involve statistical modeling, correlation analysis, and feature importance determination to uncover the factors that have the most significant influence on student grades.
 
 ## Project Description
 
